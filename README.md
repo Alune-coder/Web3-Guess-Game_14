@@ -11,7 +11,7 @@
 钱包接入：MetaMask
 
 📂 项目结构
-Web3-Guess-Game_14/
+Web3-Guess-Game\_14/
 ├── contracts/ # 智能合约目录 (GuessGame.sol)
 ├── scripts/ # 部署脚本目录 (deploy.js)
 ├── frontend/ # 前端页面目录 (index.html, app.js)
@@ -34,7 +34,7 @@ npx hardhat node
 npx hardhat run scripts/deploy.js --network localhost
 终端会输出类似 GuessGame 合约已部署到: 0x5fbdb... 的地址，请复制该地址。
 
-配置前端与钱包。打开 frontend/app.js，将 CONTRACT_ADDRESS 变量的值替换为你刚刚部署得到的合约地址。打开浏览器 MetaMask 插件，添加自定义网络：
+配置前端与钱包。打开 frontend/app.js，将 CONTRACT\_ADDRESS 变量的值替换为你刚刚部署得到的合约地址。打开浏览器 MetaMask 插件，添加自定义网络：
 网络名称：Hardhat Local
 RPC URL：http://127.0.0.1:8545
 链 ID：31337
@@ -51,4 +51,8 @@ npx http-server -p 8080
 
 📄 开源协议
 本项目基于 MIT License 开源。
-������������֧�ϼӵ��֡�
+
+
+
+冲突已解决
+
