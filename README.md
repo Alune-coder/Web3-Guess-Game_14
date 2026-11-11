@@ -1,57 +1,53 @@
-# Sample Hardhat 3 Project (`node:test` and `viem`)
+📖 项目简介
+本项目是《开源文化运动》期末考核开源项目。这是一个基于以太坊智能合约开发的去中心化猜数字小游戏（DApp）。代码完全开源，逻辑链上透明可查。玩家通过 MetaMask 钱包连接并支付 0.01 测试 ETH 参与猜数字（1-10），猜中即可赢走合约奖池内的所有奖金。
 
-This project showcases a Hardhat 3 project using the native Node.js test runner (`node:test`) and the `viem` library for Ethereum interactions.
+🛠️ 技术栈
+智能合约：Solidity ^0.8.34
 
-To learn more about Hardhat 3, please visit the [Getting Started guide](https://hardhat.org/docs/getting-started#getting-started-with-hardhat-3). To share your feedback, join our [Hardhat 3](https://hardhat.org/hardhat3-telegram-group) Telegram group or [open an issue](https://github.com/NomicFoundation/hardhat/issues/new) in our GitHub issue tracker.
+开发框架：Hardhat 3
 
-## Project Overview
+前端交互：原生 HTML/JS + ethers.js v5
 
-This example project includes:
+钱包接入：MetaMask
 
-- A simple Hardhat configuration file.
-- Foundry-compatible Solidity unit tests.
-- TypeScript integration tests using [`node:test`](https://nodejs.org/api/test.html), the new Node.js native test runner, and [`viem`](https://viem.sh/).
-- Examples demonstrating how to connect to different types of networks, including locally simulating OP mainnet.
+📂 项目结构
+Web3-Guess-Game_14/
+├── contracts/ # 智能合约目录 (GuessGame.sol)
+├── scripts/ # 部署脚本目录 (deploy.js)
+├── frontend/ # 前端页面目录 (index.html, app.js)
+├── hardhat.config.ts # Hardhat 配置文件
+├── README.md # 项目说明文档
+└── LICENSE # MIT 开源许可证
 
-## Usage
+🚀 快速开始（本地运行测试）
+本项目已在 Hardhat 本地网络（Localhost）测试通过，无需真实资金。请按照以下步骤在本地运行：
 
-### Running Tests
+安装依赖并编译合约。确保电脑已安装 Node.js (v22.13.0+)，在根目录执行：
+npm install
+npx hardhat compile
 
-To run all the tests in the project, execute the following command:
+启动本地区块链节点。打开一个新终端，启动 Hardhat 本地网络（注意：此终端窗口不要关闭）：
+npx hardhat node
+启动后，终端会输出 20 个测试账户及其私钥，请记下 Account #0 的私钥，稍后用于导入钱包。
 
-```shell
-npx hardhat test
-```
+部署智能合约。再开一个终端，将合约部署到本地网络：
+npx hardhat run scripts/deploy.js --network localhost
+终端会输出类似 GuessGame 合约已部署到: 0x5fbdb... 的地址，请复制该地址。
 
-You can also selectively run the Solidity or `node:test` tests:
+配置前端与钱包。打开 frontend/app.js，将 CONTRACT_ADDRESS 变量的值替换为你刚刚部署得到的合约地址。打开浏览器 MetaMask 插件，添加自定义网络：
+网络名称：Hardhat Local
+RPC URL：http://127.0.0.1:8545
+链 ID：31337
+货币符号：ETH
+在 MetaMask 中导入你刚才记下的 Account #0 测试私钥，你会获得 10000 个测试 ETH。
 
-```shell
-npx hardhat test solidity
-npx hardhat test nodejs
-```
+运行前端页面。在 frontend 目录下启动一个本地静态服务器：
+cd frontend
+npx http-server -p 8080
+在浏览器中访问 http://127.0.0.1:8080，连接钱包，输入 1-10 的数字即可开始游戏！
 
-### Make a deployment to Sepolia
+⚠️ 安全声明
+本项目为教学演示用途，目前采用的是“伪随机数”生成方案。在实际生产环境中，由于区块时间戳等链上数据可被矿工/验证者影响，存在被操纵的风险。工业级 DApp 通常会采用 Chainlink VRF 等去中心化预言机方案来获取绝对安全的随机数。
 
-This project includes an example Ignition module to deploy the contract. You can deploy this module to a locally simulated chain or to Sepolia.
-
-To run the deployment to a local chain:
-
-```shell
-npx hardhat ignition deploy ignition/modules/Counter.ts
-```
-
-To run the deployment to Sepolia, you need an account with funds to send the transaction. The provided Hardhat configuration includes a Configuration Variable called `SEPOLIA_PRIVATE_KEY`, which you can use to set the private key of the account you want to use.
-
-You can set the `SEPOLIA_PRIVATE_KEY` variable using the `hardhat-keystore` plugin or by setting it as an environment variable.
-
-To set the `SEPOLIA_PRIVATE_KEY` config variable using `hardhat-keystore`:
-
-```shell
-npx hardhat keystore set SEPOLIA_PRIVATE_KEY
-```
-
-After setting the variable, you can run the deployment with the Sepolia network:
-
-```shell
-npx hardhat ignition deploy --network sepolia ignition/modules/Counter.ts
-```
+📄 开源协议
+本项目基于 MIT License 开源。
