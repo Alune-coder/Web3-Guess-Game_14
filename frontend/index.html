@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>Web3 猜数字游戏</title>
+    <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+    <style>
+        body { font-family: sans-serif; text-align: center; padding: 50px; background: #f0f4f8; }
+        .card { background: white; padding: 30px; border-radius: 10px; display: inline-block; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        input { padding: 10px; font-size: 16px; width: 80px; text-align: center; }
+        button { padding: 10px 20px; font-size: 16px; cursor: pointer; background: #3b82f6; color: white; border: none; border-radius: 5px; }
+        button:hover { background: #2563eb; }
+        #status { margin-top: 20px; font-weight: bold; color: #333; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>🎲 Web3 猜数字游戏</h2>
+        <p>每次花费 0.01 测试 ETH，猜中 1-10 即可赢走奖池！</p>
+        <p>当前奖池: <strong id="pool">加载中...</strong> ETH</p>
+        <input type="number" id="guessInput" min="1" max="10" placeholder="输入数字">
+        <button onclick="play()">连接钱包并参与</button>
+        <div id="status"></div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
